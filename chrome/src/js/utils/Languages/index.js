@@ -2,12 +2,14 @@ import Settings from 'utils/Settings';
 
 import cs from './lang/cs';
 import en from './lang/en';
+import es from './lang/es';
 import nl from './lang/nl';
 import sk from './lang/sk';
 
 const ALL = [
   cs,
   en,
+  es,
   nl,
   sk
 ];
