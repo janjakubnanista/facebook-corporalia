@@ -32,5 +32,10 @@
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.2.0",
     "webpack": "1.12.10"
+  },
+  "dependencies": {
+    "q": "^1.4.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }
