@@ -27,7 +27,7 @@ var WEBPACK_CONFIG = {
   module: {
     loaders: [{
       loader: 'babel',
-      test: /.jsx?$/,
+      test: /\.jsx?$/,
       exclude: /node_modules/,
       query: {
         presets: ['es2015', 'react'],
