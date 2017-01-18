@@ -64,27 +64,6 @@ gulp.task('watch:scripts', function(done) { //eslint-disable-line no-unused-vars
   });
 });
 
-gulp.task('styles', function() {
-  var isDevelopment = config.environment !== 'production';
-  var src = path.join(config.less.src, '**/[^_]*.less');
-
-  return gulp.src(src)
-    .pipe(gulpIf(isDevelopment, sourcemaps.init()))
-    .pipe(less({
-      paths: config.less.paths
-    }).on('error', function(error) {
-      gutil.log('[less:build]', '[ERROR]', error.message);
-
-      this.emit('end', new gutil.PluginError('styles', error, {
-        showStack: true
-      }));
-    }))
-    .pipe(autoprefixer())
-    .pipe(gulpIf(!isDevelopment, cssnano({ zindex: false })))
-    .pipe(gulpIf(isDevelopment, sourcemaps.write('.')))
-    .pipe(gulp.dest(config.less.dest));
-});
-
 gulp.task('assets', function() {
   return gulp.src(CHROME_ASSETS_SOURCE_PATH)
     .pipe(gulp.dest(CHROME_BUILD_PATH));
@@ -94,13 +73,9 @@ gulp.task('watch:assets', function() {
   gulp.watch(CHROME_ASSETS_SOURCE_PATH, ['assets']);
 });
 
-gulp.task('watch:styles', function() {
-  gulp.watch(path.join(__dirname, '../../**/*.less'), ['styles']);
-});
-
 gulp.task('clean', function() {
   spawnSync('rm', ['-rf', CHROME_BUILD_PATH]);
 });
 
-gulp.task('watch', ['watch:scripts', 'watch:styles', 'watch:assets']);
-gulp.task('build', ['scripts', 'styles', 'assets']);
+gulp.task('watch', ['watch:assets', 'watch:scripts']);
+gulp.task('build', ['scripts', 'assets']);
