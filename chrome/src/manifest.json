@@ -21,7 +21,7 @@
       "*://*.facebook.com/*"
     ],
     "js": [
-      "js/index.js"
+      "js/contentscript.js"
     ]
   }],
 
