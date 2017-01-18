@@ -9,16 +9,23 @@ var zip = require('gulp-zip');
 var ENVIRONMENT = process.env.NODE_ENV || 'development';
 var PRODUCTION = ENVIRONMENT === 'production';
 
-var CHROME_SOURCE_PATH = 'chrome/src';
-var CHROME_BUILD_PATH = 'chrome/build';
-var CHROME_PACKAGES_PATH = 'chrome/package';
-var CHROME_ASSETS_SOURCE_PATH = 'chrome/src/{html/*,img/*,manifest.json}';
+var CHROME_SOURCE_PATH = path.join(__dirname, 'chrome/src');
+var CHROME_BUILD_PATH = path.join(__dirname, 'chrome/build');
+var CHROME_PACKAGES_PATH = path.join(__dirname, 'chrome/package');
+
+var CHROME_ASSETS_SOURCE_PATH = CHROME_SOURCE_PATH + '/{html/*,img/*,manifest.json}';
+var CHROME_SCRIPTS_SOURCE_PATH = path.join(CHROME_SOURCE_PATH, 'js');
+
 
 var WEBPACK_CONFIG = {
+  context: CHROME_SCRIPTS_SOURCE_PATH,
   devtool: PRODUCTION ? null : 'source-map',
   entry: {
-    'js/index': './chrome/src/js/index',
-    'js/popup': './chrome/src/js/popup'
+    'js/contentscript': './contentscript',
+    'js/popup': './popup'
+  },
+  resolve: {
+    root: [__dirname, CHROME_SCRIPTS_SOURCE_PATH]
   },
   output: {
     path: CHROME_BUILD_PATH,
