@@ -31,7 +31,7 @@ function find(languageCode) {
 function detect(document) {
   const siteLanguageCode = document.documentElement.getAttribute('lang');
   const navigatorLanguageCode = navigator.language;
-  const detectedlanguage = find(siteLanguageCode) || find(navigatorLanguageCode);
+  const detectedlanguage = find(siteLanguageCode) || find(navigatorLanguageCode) || find('en');
 
   return detectedlanguage || null;
 }
