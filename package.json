@@ -6,6 +6,7 @@
   "scripts": {
     "build": "gulp scripts assets",
     "watch": "gulp watch:scripts watch:assets"
+    "package": "gulp build && gulp package",
   },
   "author": "",
   "license": "MIT",
@@ -25,6 +26,7 @@
     "gulp-notify": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
+    "gulp-zip": "^3.2.0",
     "webpack": "1.12.10"
   }
 }

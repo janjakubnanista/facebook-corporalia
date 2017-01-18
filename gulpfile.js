@@ -1,20 +1,24 @@
+var fs = require('fs');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var path = require('path');
 var spawnSync = require('child_process').spawnSync;
-var url = require('url');
 var webpack = require('webpack');
+var zip = require('gulp-zip');
 
 var ENVIRONMENT = process.env.NODE_ENV || 'development';
 var PRODUCTION = ENVIRONMENT === 'production';
 
+var CHROME_SOURCE_PATH = 'chrome/src';
 var CHROME_BUILD_PATH = 'chrome/build';
+var CHROME_PACKAGES_PATH = 'chrome/package';
 var CHROME_ASSETS_SOURCE_PATH = 'chrome/src/{html/*,img/*,manifest.json}';
 
 var WEBPACK_CONFIG = {
   devtool: PRODUCTION ? null : 'source-map',
   entry: {
-    'js/index': './chrome/src/js/index'
+    'js/index': './chrome/src/js/index',
+    'js/popup': './chrome/src/js/popup'
   },
   output: {
     path: CHROME_BUILD_PATH,
@@ -40,7 +44,7 @@ var WEBPACK_CONFIG = {
     PRODUCTION && new webpack.optimize.DedupePlugin(),
     PRODUCTION && new webpack.optimize.UglifyJsPlugin()
   ].filter(Boolean)
-}
+};
 
 gulp.task('scripts', function(done) {
   webpack(WEBPACK_CONFIG, function(error, stats) {
@@ -75,6 +79,17 @@ gulp.task('watch:assets', function() {
 
 gulp.task('clean', function() {
   spawnSync('rm', ['-rf', CHROME_BUILD_PATH]);
+});
+
+gulp.task('package', () => {
+  var manifestContents = fs.readFileSync(path.join(CHROME_SOURCE_PATH, 'manifest.json'));
+  var manifest = JSON.parse(manifestContents);
+  var version = manifest.version;
+  var name = 'package-' + version + '.zip';
+
+  return gulp.src(CHROME_BUILD_PATH)
+    .pipe(zip(name))
+    .pipe(gulp.dest(CHROME_PACKAGES_PATH));
 });
 
 gulp.task('watch', ['watch:assets', 'watch:scripts']);
