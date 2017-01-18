@@ -33,6 +33,9 @@ var WEBPACK_CONFIG = {
         presets: ['es2015', 'react'],
         plugins: ['transform-object-rest-spread']
       }
+    }, {
+      loader: 'json',
+      test: /\.json$/
     }]
   },
   plugins: [
