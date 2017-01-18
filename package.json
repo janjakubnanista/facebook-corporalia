@@ -8,7 +8,11 @@
     "package": "gulp build && gulp package",
     "watch": "gulp watch"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/janjakubnanista/facebook-corporalia.git"
+  },
+  "author": "Jan Jakub Nanista <jan.jakub.nanista@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.5.2",
