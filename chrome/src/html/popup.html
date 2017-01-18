@@ -1,37 +1,78 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
     <title>Mean Facebook</title>
     <style>
       body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
+        width: 280px;
+        margin: 0;
+        padding: 20px;
+        font-family: "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 12px;
       }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
+
+      h2 {
+        margin: 0 0 20px 0;
+        font-size: 18px;
+      }
+
+      aside {
+        display: block;
+        color: #999;
+        font-style: italic;
+      }
+
+      label {
+        margin-right: 20px;
+      }
+
+      select {
+        height: 28px;
+        margin: 0 0 12px;
+        padding: 6px;
+        -webkit-appearance: none;
+           -moz-appearance: none;
+                appearance: none;
+        border: 1px solid #cacaca;
+        border-radius: 3px;
+        background-color: #fefefe;
+        font-family: inherit;
+        font-size: 12px;
+        line-height: normal;
+        color: #0a0a0a;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28138, 138, 138%29'></polygon></svg>");
+        background-origin: content-box;
+        background-position: right -1rem center;
+        background-repeat: no-repeat;
+        background-size: 9px 6px;
+        padding-right: 1.5rem;
+        transition: box-shadow 0.5s, border-color 0.25s ease-in-out; }
+        @media screen and (min-width: 0\0) {
+          select {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAIpJREFUeNrEkckNgDAMBBfRkEt0ObRBBdsGXUDgmQfK4XhH2m8czQAAy27R3tsw4Qfe2x8uOO6oYLb6GlOor3GF+swURAOmUJ+RwtEJs9WvTGEYxBXqI1MQAZhCfUQKRzDMVj+TwrAIV6jvSUEkYAr1LSkcyTBb/V+KYfX7xAeusq3sLDtGH3kEGACPWIflNZfhRQAAAABJRU5ErkJggg=="); } }
+        select:focus {
+          outline: none;
+          border: 1px solid #8a8a8a;
+          background-color: #fefefe;
+          box-shadow: 0 0 5px #cacaca;
+          transition: box-shadow 0.5s, border-color 0.25s ease-in-out; }
+        select:disabled {
+          background-color: #e6e6e6;
+          cursor: not-allowed; }
+        select::-ms-expand {
+          display: none; }
+        select[multiple] {
+          height: auto;
+          background-image: none; }
+
+      .settings__row {
+        margin-bottom: 5px;
       }
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
-    <script src="popup.js"></script>
   </head>
   <body>
-    <div id="status"></div>
-    <img id="image-result" hidden>
+    <div id="settings"/>
+
+    <script src="../js/popup.js"></script>
   </body>
 </html>
-
