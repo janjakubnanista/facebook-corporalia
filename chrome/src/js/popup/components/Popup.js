@@ -60,7 +60,7 @@ export default class Popup extends React.Component {
           disabled={isWorking}
           onChange={this.onLanguageChanged}
           value={this.state.language}>
-          <option key='auto' value='auto'>Automatically detect</option>
+          <option key='auto' value='auto'>Your Facebook language</option>
           {languages.map(language => <option key={language.code} value={language.code}>{language.name}</option>)}
         </select>
       </div>
