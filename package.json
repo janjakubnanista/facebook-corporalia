@@ -4,9 +4,9 @@
   "description": "Simple chrome extension that makes your facebook suffer from Tourette's syndrome.",
   "main": "index.js",
   "scripts": {
-    "build": "gulp scripts assets",
-    "watch": "gulp watch:scripts watch:assets"
+    "build": "gulp build",
     "package": "gulp build && gulp package",
+    "watch": "gulp watch"
   },
   "author": "",
   "license": "MIT",
