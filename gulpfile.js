@@ -97,7 +97,7 @@ gulp.task('package', () => {
   var version = manifest.version;
   var name = 'package-' + version + '.zip';
 
-  return gulp.src(CHROME_BUILD_PATH + '/*')
+  return gulp.src(CHROME_BUILD_PATH + '/**/*')
     .pipe(zip(name))
     .pipe(gulp.dest(CHROME_PACKAGES_PATH));
 });
