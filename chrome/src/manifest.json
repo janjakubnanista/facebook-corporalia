@@ -3,7 +3,7 @@
 
   "name": "Mean Facebook",
   "description": "Simple chrome extension that makes your facebook suffer from Tourette's syndrome.",
-  "version": "1.0.9",
+  "version": "1.0.10",
 
   "icons": {
     "128": "img/icon-128.png",
