@@ -44,6 +44,10 @@ function replaceTextEmoticons(node, generator) {
   emoticonNodes.forEach(emoticonNode => replaceTextEmoticon(emoticonNode, generator.next()));
 }
 
+function ensureAvailable() {
+  return Settings.areAvailable() ? q.resolve() : q.reject();
+}
+
 function ensureEnabled() {
   return Settings.get().then(({ enabled }) => {
     if (!enabled) return q.reject();
@@ -77,9 +81,14 @@ function initialize(language) {
 
 function reportError(error) {
   console.error('Mean Facebook addon has failed with an error:'); // eslint-disable-line no-console
-  console.error(error); // eslint-disable-line no-console
+  console.error({ message: error.message, stack: error.stack }); // eslint-disable-line no-console
 }
 
-ensureEnabled()
+function reportUnavailable() {
+  console.error('Mean Facebook addon needs storage API in order to work.'); // eslint-disable-line no-console
+}
+
+ensureAvailable()
+  .then(ensureEnabled, reportUnavailable)
   .then(getLanguage)
   .then(initialize, reportError);
