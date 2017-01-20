@@ -39,6 +39,9 @@ export default class Popup extends React.Component {
   render() {
     const { isWorking } = this.state;
     const languages = Languages.getAvailable();
+    const isAuto = this.state.language === 'auto';
+    const fallbackLanguageCode = Languages.getFirstSupportedFallbackLanguageCode();
+    const fallbackLanguage = Languages.find(fallbackLanguageCode);
 
     return <div>
       <div className='settings__row'>
@@ -60,10 +63,17 @@ export default class Popup extends React.Component {
           disabled={isWorking}
           onChange={this.onLanguageChanged}
           value={this.state.language}>
-          <option key='auto' value='auto'>Your Facebook language</option>
+          <option key='auto' value='auto'>Automatically detect</option>
           {languages.map(language => <option key={language.code} value={language.code}>{language.name}</option>)}
         </select>
       </div>
+
+      {isAuto && <div className='settings__row'>
+        <aside>
+          When auto is selected this add-on will try to guess the language from the posts on your facebook.
+          If that fails the language will fall back to {fallbackLanguage.name}.
+        </aside>
+      </div>}
 
       <aside>You need to refresh the page after you change the settings.</aside>
     </div>;
