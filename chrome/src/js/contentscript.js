@@ -4,7 +4,7 @@ import Languages from 'utils/Languages';
 import Settings from 'utils/Settings';
 import WordGenerator from 'utils/WordGenerator';
 
-const FACEBOOK_EMOTICON_URL_PATTERN = /^https:\/\/www\.facebook\.com\/images\/emoji\.php.*/i;
+const FACEBOOK_EMOTICON_URL_PATTERN = /^https:\/\/(www\.facebook\.com|static\.xx\.fbcdn\.net)\/images\/emoji\.php.*/i;
 
 function emoticonNodeFilter(node) {
   const tagName = node.tagName.toLowerCase();
