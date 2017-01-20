@@ -5,13 +5,15 @@ import en from './lang/en';
 import es from './lang/es';
 import nl from './lang/nl';
 import sk from './lang/sk';
+import sk_lu from './lang/sk-lu';
 
 const ALL = [
   cs,
   en,
   es,
   nl,
-  sk
+  sk,
+  sk_lu
 ];
 
 function getAvailable() {
