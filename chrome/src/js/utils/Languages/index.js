@@ -1,7 +1,8 @@
 import Settings from 'utils/Settings';
 
 import cs from './lang/cs';
-import en from './lang/en';
+import en_gb from './lang/en-gb';
+import en_us from './lang/en-us';
 import es from './lang/es';
 import nl from './lang/nl';
 import sk from './lang/sk';
@@ -9,7 +10,8 @@ import sk_lu from './lang/sk-lu';
 
 const ALL = [
   cs,
-  en,
+  en_gb,
+  en_us,
   es,
   nl,
   sk,
