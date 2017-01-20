@@ -20,27 +20,51 @@ function getAvailable() {
   return ALL.slice();
 }
 
-function getSelected() {
+function getSelectedLanguageCode() {
   return Settings.get().then(({ language }) => language);
 }
 
 function find(languageCode) {
-  const majorLanguageCode = languageCode.split(/-_/).shift().toLowerCase();
+  if (!languageCode) return null;
 
-  return ALL.find(({ code }) => code === majorLanguageCode);
+  const normalisedLanguageCode = languageCode.toLowerCase().replace('_', '-');
+  const exactMatch = ALL.find(({ code }) => code === normalisedLanguageCode);
+  if (exactMatch) return exactMatch;
+
+  const [majorLanguageCode] = normalisedLanguageCode.split(/-/);
+  const majorMatch = ALL.find(({ code }) => code.split('-').shift() === majorLanguageCode);
+  if (majorMatch) return majorMatch;
+
+  return null;
 }
 
-function detect(document) {
-  const siteLanguageCode = document.documentElement.getAttribute('lang');
-  const navigatorLanguageCode = navigator.language;
-  const detectedlanguage = find(siteLanguageCode) || find(navigatorLanguageCode) || find('en');
+function getFacebookLanguageCode() {
+  return document.documentElement.getAttribute('lang');
+}
 
-  return detectedlanguage || null;
+function getBrowserLanguageCode() {
+  return navigator.language;
+}
+
+function getFallbackLanguageCode() {
+  return 'en-gb';
+}
+
+function getFirstSupportedFallbackLanguageCode() {
+  const facebookLanguageCode = getFacebookLanguageCode();
+  const browserLanguageCode = getBrowserLanguageCode();
+  const fallbackLanguageCode = getFallbackLanguageCode();
+  const languageCodes = [facebookLanguageCode, browserLanguageCode, fallbackLanguageCode];
+
+  return languageCodes.find(languageCode => !!find(languageCode));
 }
 
 export default {
-  detect,
   find,
   getAvailable,
-  getSelected
+  getBrowserLanguageCode,
+  getFacebookLanguageCode,
+  getFallbackLanguageCode,
+  getSelectedLanguageCode,
+  getFirstSupportedFallbackLanguageCode
 };
