@@ -6,7 +6,6 @@ import en_us from './lang/en-us';
 import es from './lang/es';
 import nl from './lang/nl';
 import sk from './lang/sk';
-import sk_lu from './lang/sk-lu';
 
 const ALL = [
   cs,
@@ -14,8 +13,7 @@ const ALL = [
   en_us,
   es,
   nl,
-  sk,
-  sk_lu
+  sk
 ];
 
 function getAvailable() {
