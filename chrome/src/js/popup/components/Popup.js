@@ -70,7 +70,7 @@ export default class Popup extends React.Component {
 
       {isAuto && <div className='settings__row'>
         <aside>
-          When auto is selected this add-on will try to guess the language from the posts on your facebook.
+          When <strong>Automatically detect</strong> is selected this add-on will try to guess the language from the posts on your facebook.
           If that fails the language will fall back to {fallbackLanguage.name}.
         </aside>
       </div>}
